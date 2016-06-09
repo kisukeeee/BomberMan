@@ -82,11 +82,15 @@ class Board:
         """ボムなりオブジェクトなりをBoardへ追加."""
         self.board[object.y][object.x].append(object)
 
-    def deleteObject(self, x, y, cla):
-        """
-        Board上からオブジェクトを削除.
-        Classにはclassを指定.
-        """
+    def deleteObject(self, delobj):
+        for x in range(self.width):
+            for y in range(self.height):
+                count = 0
+                for obj in self.board[y][x]:
+                    if delobj == obj:
+                        del self.board[y][x][count]
+                        return
+
 
     def getClassList(self, Class):
         ret = []
@@ -102,8 +106,14 @@ class Board:
         Boms = self.getClassList(Bom)
         for bom in Boms:
             if bom.flag == 1:
+                print("right:" + str(bom.right))
+                print("left :" + str(bom.left))
+                print("up   :" + str(bom.up))
+                print("down :" + str(bom.down))
+                print(BurstBoard)
                 BurstBoard[bom.x - bom.left:bom.x + bom.right + 1, bom.y] = 1
                 BurstBoard[bom.x, bom.y - bom.up:bom.y + bom.down + 1] = 1
+                self.deleteObject(bom)
 
         for x in range(self.width + 2):
             for y in range(self.height + 2):
