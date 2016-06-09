@@ -117,7 +117,6 @@ class Bom:
     def decision(self,Human,Bom):
         for i in Human:
             for bom in Bom:
-                print("FLAG:"+str(bom.flag))
                 if bom.x == i.x:
                     if bom.flag == 1 and bom.y - bom.up >= i.y and bom.y + bom.down <= i.y:
                         i.did = True
@@ -125,4 +124,3 @@ class Bom:
                 if bom.y == i.y:
                     if bom.flag == 1 and bom.x + bom.right >= i.x and bom.x - bom.left <= i.x:
                         i.did = True
-                        print("DID")
