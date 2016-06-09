@@ -46,7 +46,6 @@ class Board:
         while True:
             # up
             if (player.y - direc) > 0 and flag[0] is 1:
-
                 if self.class_check(self.board[player.y - direc][player.x]):
                     range[0] += 1
                 else:
@@ -65,7 +64,7 @@ class Board:
                     flag[2] = 0
             # le
             if (player.x - direc) > 0 and flag[3] is 1:
-                if self.class_check(self.board[player.y - direc][player.x]):
+                if self.class_check(self.board[player.y][player.x - direc]):
                     range[3] += 1
                 else:
                     flag[3] = 0
@@ -107,11 +106,6 @@ class Board:
         for bom in Boms:
             print(bom.time)
             if bom.flag == 1:
-                print("right:" + str(bom.right))
-                print("left :" + str(bom.left))
-                print("up   :" + str(bom.up))
-                print("down :" + str(bom.down))
-                print(BurstBoard)
                 BurstBoard[bom.x - bom.left:bom.x + bom.right + 1, bom.y] = 1
                 BurstBoard[bom.x, bom.y - bom.up:bom.y + bom.down + 1] = 1
                 self.deleteObject(bom)

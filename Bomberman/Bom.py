@@ -5,10 +5,7 @@ class Bom:
         self.y = y
         self.fire = fire    # 火力
         self.time = time    # 爆発するまでのターン数
-        self.up = 0
-        self.down = 0
-        self.right = 0
-        self.left = 0
+        self.up = self.down = self.right = self.left = self.fire
         self.flag = 0
 
     def isBurst(self):
@@ -24,8 +21,8 @@ class Bom:
            # print(i.up)
            # print(i.down)
             self.bom_time(i)
-            self.bom_var(i,Object,Board.height+2)
-            self.bom_side(i,Object,Board.width+2)
+            self.bom_var(i,Object)
+            self.bom_side(i,Object)
         while(True):
             count = 0
             for i in Bom:
@@ -34,8 +31,8 @@ class Bom:
 
             for i in Bom:
                 if i.flag == 1 and i.time != 1:
-                    self.bom_side(i,Object,Board.width+2)
-                    self.bom_var(i,Object,Board.height+2)
+                    self.bom_side(i,Object)
+                    self.bom_var(i,Object)
                     i.time = 1
                     count = count + 1
 
@@ -68,47 +65,32 @@ class Bom:
         elif Bom.time == 1:
             Bom.flag = 1
 
-    def bom_var(self,Bom,Object,H):
+    def bom_var(self,Bom,Object):
         if Bom.flag == 1:
-            for i in range(1,Bom.fire+1):
-                if Bom.y+i > H:
-                    Bom.down  = Bom.down + 1
-                elif Bom.y-i <= 0:
-                    Bom.up = Bom.up + 1
-                else:
-                    Bom.down = Bom.down + 1
-                    Bom.up = Bom.up + 1
-
+            # Bom.up = Bom.down = Bom.fire # 生成時に初期化したのでコメントアウト
             for i in Object:
                 if Bom.x == i.x:
-                    if Bom.y - Bom.up < i.y and Bom.y > i.y:
+                    if Bom.y - Bom.up <= i.y and Bom.y > i.y:
                         Bom.up = Bom.y - 1 - i.y
                         if Bom.up < 0:
                             Bom.up = 0
-                    if Bom.y + Bom.down > i.y and Bom.y < i.y:
+                    if Bom.y + Bom.down >= i.y and Bom.y < i.y:
                         Bom.down = i.y - Bom.y - 1
+                        print("Object"+str(i.y))
                         if Bom.down < 0:
                             Bom.down = 0
 
 
-    def bom_side(self,Bom,Object,W):
+    def bom_side(self,Bom,Object):
         if Bom.flag == 1:
-            for i in range(1,Bom.fire+1):
-                if Bom.x+i > W:
-                    Bom.left  = Bom.left + 1
-                elif Bom.x-i <= 0:
-                    Bom.right = Bom.right + 1
-                else:
-                    Bom.left = Bom.left + 1
-                    Bom.right = Bom.right + 1
-
+            # Bom.right = Bom.left = Bom.fire # 生成時に初期化したのでコメントアウト
             for i in Object:
                 if Bom.y == i.y:
-                    if Bom.x - Bom.left < i.x and Bom.x > i.x:
+                    if Bom.x - Bom.left <= i.x and Bom.x > i.x:
                         Bom.left = Bom.x - 1 - i.x
                         if Bom.left < 0:
                             Bom.left = 0
-                    if Bom.x + Bom.right > i.x and Bom.x < i.x:
+                    if Bom.x + Bom.right >= i.x and Bom.x < i.x:
                         Bom.right = i.x - Bom.x - 1
                         if Bom.right < 0:
                             Bom.right = 0
@@ -134,10 +116,13 @@ class Bom:
 
     def decision(self,Human,Bom):
         for i in Human:
-            if Bom.x == i.x:
-                if Bom.y + Bom.up >= i.y or Bom.y - Bom.down <= i.y:
-                    i.die = True
+            for bom in Bom:
+                print("FLAG:"+str(bom.flag))
+                if bom.x == i.x:
+                    if bom.flag == 1 and bom.y - bom.up >= i.y and bom.y + bom.down <= i.y:
+                        i.did = True
 
-            if Bom.y == i.y:
-                if Bom.x + Bom.right >= i.x or Bom.x - Bom.left <= i.x:
-                    i.die = True
+                if bom.y == i.y:
+                    if bom.flag == 1 and bom.x + bom.right >= i.x and bom.x - bom.left <= i.x:
+                        i.did = True
+                        print("DID")
