@@ -83,8 +83,8 @@ class Board:
         self.board[object.y][object.x].append(object)
 
     def deleteObject(self, delobj):
-        for x in range(self.width):
-            for y in range(self.height):
+        for x in range(self.width+2):
+            for y in range(self.height+2):
                 count = 0
                 for obj in self.board[y][x]:
                     if delobj == obj:
@@ -94,8 +94,8 @@ class Board:
 
     def getClassList(self, Class):
         ret = []
-        for x in range(self.width):
-            for y in range(self.height):
+        for x in range(self.width+2):
+            for y in range(self.height+2):
                 for obj in self.board[y][x]:
                     if (isinstance(obj, Class)):
                         ret.append(obj)
@@ -105,6 +105,7 @@ class Board:
         BurstBoard = np.zeros((self.height + 2, self.width + 2)).astype(np.int32)
         Boms = self.getClassList(Bom)
         for bom in Boms:
+            print(bom.time)
             if bom.flag == 1:
                 print("right:" + str(bom.right))
                 print("left :" + str(bom.left))

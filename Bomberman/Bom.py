@@ -24,8 +24,8 @@ class Bom:
            # print(i.up)
            # print(i.down)
             self.bom_time(i)
-            self.bom_var(i,Object,Board.height)
-            self.bom_side(i,Object,Board.width)
+            self.bom_var(i,Object,Board.height+2)
+            self.bom_side(i,Object,Board.width+2)
         while(True):
             count = 0
             for i in Bom:
@@ -34,8 +34,8 @@ class Bom:
 
             for i in Bom:
                 if i.flag == 1 and i.time != 1:
-                    self.bom_side(i,Object,Board.width)
-                    self.bom_var(i,Object,Board.height)
+                    self.bom_side(i,Object,Board.width+2)
+                    self.bom_var(i,Object,Board.height+2)
                     i.time = 1
                     count = count + 1
 
@@ -81,15 +81,15 @@ class Bom:
 
             for i in Object:
                 if Bom.x == i.x:
-                    if Bom.y + Bom.up > i.y:
-                        Bom.up = Bom.up - i.y
+                    if Bom.y - Bom.up < i.y and Bom.y > i.y:
+                        Bom.up = Bom.y - 1 - i.y
                         if Bom.up < 0:
                             Bom.up = 0
-                    if Bom.y - Bom.left < i.y:
-                        Bom.down = i.y - (Bom.y - Bom.down)
+                    if Bom.y + Bom.down > i.y and Bom.y < i.y:
+                        Bom.down = i.y - Bom.y - 1
                         if Bom.down < 0:
                             Bom.down = 0
-                print(Bom.up)
+
 
     def bom_side(self,Bom,Object,W):
         if Bom.flag == 1:
@@ -104,16 +104,14 @@ class Bom:
 
             for i in Object:
                 if Bom.y == i.y:
-                    if Bom.x < i.x:
-                        if Bom.x + Bom.right > i.x:
-                            Bom.right = Bom.x + Bom.right - i.x
-                            if Bom.right < 0:
-                                Bom.right = 0
-                    else:
-                        if Bom.x - Bom.left < i.x:
-                            Bom.left  = i.x - (Bom.x - Bom.left)
-                            if Bom.left < 0:
-                                Bom.left = 0
+                    if Bom.x - Bom.left < i.x and Bom.x > i.x:
+                        Bom.left = Bom.x - 1 - i.x
+                        if Bom.left < 0:
+                            Bom.left = 0
+                    if Bom.x + Bom.right > i.x and Bom.x < i.x:
+                        Bom.right = i.x - Bom.x - 1
+                        if Bom.right < 0:
+                            Bom.right = 0
 
     def bom_chain(self,burn_Bom,Bom):
         for i in Bom:
