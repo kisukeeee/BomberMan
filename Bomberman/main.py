@@ -41,5 +41,5 @@ if __name__ == '__main__':
             break
         player.move(directions, board.movable_range(player))
         #print(board.getClassList(Bom))
-        Bom(1,1,1,1).calcBurstArea(board.getClassList(Bom), board.getClassList(Object), board, p)
+        Bom.calcBurstArea(board.getClassList(Bom), board.getClassList(Object), board, p)
         board.display(player)
