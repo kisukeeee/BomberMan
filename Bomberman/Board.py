@@ -1,4 +1,8 @@
 import sys
+import numpy as np
+from Player import Player
+from Object import Object
+from Bom import Bom
 
 class Board:
     def __init__(self, width, height):

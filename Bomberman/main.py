@@ -1,8 +1,5 @@
 #coding:UTF-8"
-import sys
-import math
-import string
-import numpy as np
+
 from Bom import Bom
 from Player import Player
 from Object import Object
