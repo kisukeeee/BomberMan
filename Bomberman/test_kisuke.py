@@ -4,6 +4,7 @@ import math
 import string
 import numpy as np
 from Bom import Bom
+from Player import Player
 
 class Player:
     def __init__(self, x, y, fire, ID):
