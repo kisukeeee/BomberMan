@@ -97,7 +97,7 @@ class Board:
                         ret.append(obj)
         return ret
 
-    def display(self, p: Player):
+    def display(self, p: list):
         BurstBoard = np.zeros((self.height + 2, self.width + 2)).astype(np.int32)
         Boms = self.getClassList(Bom)
         for bom in Boms:
@@ -109,8 +109,9 @@ class Board:
             for y in range(self.height + 2):
                 if BurstBoard[y, x] == 1:
                     sys.stdout.write('*')
-                elif p.x == y and p.y == x:
-                    sys.stdout.write(p.ID)
+                elif [plr for plr in p if plr.x == y and plr.y == x]:
+                     player=[plr for plr in p if plr.x == y and plr.y == x]
+                     sys.stdout.write(player[0].ID)
                 elif self.board[x][y] != []:
                     for obj in self.board[x][y]:
                         if (isinstance(obj, Bom)):

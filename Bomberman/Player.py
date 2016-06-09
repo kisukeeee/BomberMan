@@ -10,16 +10,18 @@ class Player:
         self.did = False
 
     def move(self, direction, dirange):
-        if 'up' in direction and dirange[0] > 0:
-            self.y -= 1
-        elif 'dw' in direction and dirange[1] > 0:
-            self.y += 1
-        elif 'ri' in direction and dirange[2] > 0:
-            self.x += 1
-        elif 'le' in direction and dirange[3] > 0:
-            self.x -= 1
+        if not self.did:
+            if 'up' in direction and dirange[0] > 0:
+                self.y -= 1
+            elif 'dw' in direction and dirange[1] > 0:
+                self.y += 1
+            elif 'ri' in direction and dirange[2] > 0:
+                self.x += 1
+            elif 'le' in direction and dirange[3] > 0:
+                self.x -= 1
 
     def createBom(self):
-        bom = Bom(x=self.x, y=self.y, fire=self.fire, time=3)
-        return bom
+        if not self.did:
+            bom = Bom(x=self.x, y=self.y, fire=self.fire, time=3)
+            return bom
 

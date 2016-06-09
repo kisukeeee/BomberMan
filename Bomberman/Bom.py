@@ -17,27 +17,27 @@ class Bom:
         else:
             return False
 
-    def calcBurstArea(self,Bom,Object,Board,Human:list):
+    def calcBurstArea(self, Bom, Object, Board, human:list):
         for i in Bom:
            # print(i.right)
            # print(i.left)
            # print(i.up)
            # print(i.down)
             self.bom_time(i)
-            self.bom_var(i,Object,Board.height)
-            self.bom_side(i,Object,Board.width)
-        while(True):
+            self.bom_var(i, Object, Board.height)
+            self.bom_side(i, Object, Board.width)
+        while True:
             count = 0
             for i in Bom:
                 if i.flag == 1:
-                    self.bom_chain(i,Bom)
+                    self.bom_chain(i, Bom)
         
             for i in Bom:
                 if i.flag == 1 and i.time != 1:
-                    self.bom_side(i,Object,Board.width)
-                    self.bom_var(i,Object,Board.height)
+                    self.bom_side(i, Object, Board.width)
+                    self.bom_var(i, Object, Board.height)
                     i.time = 1
-                    count = count + 1
+                    count += 1
 
             if count == 0:
                 break
@@ -68,21 +68,21 @@ class Bom:
         elif Bom.time == 1:
             Bom.flag = 1
 
-    def bom_var(self,Bom,Object,H):
+    def bom_var(self, Bom, Object, H):
         if Bom.flag == 1:
-            for i in range(1,Bom.fire+1):
+            for i in range(1, Bom.fire+1):
                 if Bom.y+i > H:
-                    Bom.down  = Bom.down + 1
+                    Bom.down += 1
                 elif Bom.y-i <= 0:
-                    Bom.up = Bom.up + 1
+                    Bom.up += 1
                 else:
-                    Bom.down = Bom.down + 1
-                    Bom.up = Bom.up + 1
+                    Bom.down += 1
+                    Bom.up += 1
         
             for i in Object:
                 if Bom.x == i.x:
                     if Bom.y + Bom.up > i.y:
-                        Bom.up = Bom.y + Bom.up - i.y
+                        Bom.up = Bom.up - i.y
                         if Bom.up < 0:
                             Bom.up = 0
                     if Bom.y - Bom.left < i.y:
@@ -91,16 +91,16 @@ class Bom:
                             Bom.down = 0
 
 
-    def bom_side(self,Bom,Object,W):
+    def bom_side(self, Bom, Object, W):
         if Bom.flag == 1:
-            for i in range(1,Bom.fire+1):
+            for i in range(1, Bom.fire+1):
                 if Bom.x+i > W:
-                    Bom.left  = Bom.left + 1
+                    Bom.left += 1
                 elif Bom.x-i <= 0:
-                    Bom.right = Bom.right + 1
+                    Bom.right += 1
                 else:
-                    Bom.left = Bom.left + 1
-                    Bom.right = Bom.right + 1
+                    Bom.left += 1
+                    Bom.right += 1
 
             for i in Object:
                 if Bom.y == i.y:
@@ -111,11 +111,11 @@ class Bom:
                                 Bom.right = 0
                     else:
                         if Bom.x - Bom.left < i.x:
-                            Bom.left  = i.x - (Bom.x - Bom.left)
+                            Bom.left = i.x - (Bom.x - Bom.left)
                             if Bom.left < 0:
                                 Bom.left = 0
     
-    def bom_chain(self,burn_Bom,Bom):
+    def bom_chain(self, burn_Bom, Bom):
         for i in Bom:
             if burn_Bom.x == i.x and burn_Bom.y == i.y:
                 continue
@@ -125,7 +125,7 @@ class Bom:
             if burn_Bom.y == i.y:
                 if burn_Bom.x + burn_Bom.right > i.x:
                     i.flag = 1
-                if burn_Bom.x - burn_Bom.left  < i.x:
+                if burn_Bom.x - burn_Bom.left < i.x:
                     i.flag = 1
 
             if burn_Bom.x == i.x:
@@ -134,7 +134,7 @@ class Bom:
                 if burn_Bom.y - burn_Bom.down < i.y:
                     i.flag = 1
     
-    def decision(self,Human,Bom):
+    def decision(self, Human, Bom):
         for i in Human:
             if Bom.x == i.x:
                 if Bom.y + Bom.up >= i.y or Bom.y - Bom.down <= i.y:
