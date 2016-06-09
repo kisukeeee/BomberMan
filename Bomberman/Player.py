@@ -1,4 +1,6 @@
 # coding=utf-8
+from Bom import Bom
+
 class Player:
     def __init__(self, x, y, fire, ID):
         self.x = x
