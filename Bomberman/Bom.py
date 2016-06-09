@@ -30,8 +30,13 @@ class Bom:
             count = 0
             for i in Bom:
                 if i.flag == 1:
+<<<<<<< HEAD
                     self.bom_chain(i, Bom)
         
+=======
+                    self.bom_chain(i,Bom)
+
+>>>>>>> origin/master
             for i in Bom:
                 if i.flag == 1 and i.time != 1:
                     self.bom_side(i, Object, Board.width)
@@ -49,7 +54,7 @@ class Bom:
         '''
         for i in Bom:
             if i.flag == 1:
-                
+
         '''
         """
         爆発の範囲を計算して返す.
@@ -76,9 +81,15 @@ class Bom:
                 elif Bom.y-i <= 0:
                     Bom.up += 1
                 else:
+<<<<<<< HEAD
                     Bom.down += 1
                     Bom.up += 1
         
+=======
+                    Bom.down = Bom.down + 1
+                    Bom.up = Bom.up + 1
+
+>>>>>>> origin/master
             for i in Object:
                 if Bom.x == i.x:
                     if Bom.y + Bom.up > i.y:
@@ -89,7 +100,7 @@ class Bom:
                         Bom.down = i.y - (Bom.y - Bom.down)
                         if Bom.down < 0:
                             Bom.down = 0
-
+                print(Bom.up)
 
     def bom_side(self, Bom, Object, W):
         if Bom.flag == 1:
@@ -114,8 +125,13 @@ class Bom:
                             Bom.left = i.x - (Bom.x - Bom.left)
                             if Bom.left < 0:
                                 Bom.left = 0
+<<<<<<< HEAD
     
     def bom_chain(self, burn_Bom, Bom):
+=======
+
+    def bom_chain(self,burn_Bom,Bom):
+>>>>>>> origin/master
         for i in Bom:
             if burn_Bom.x == i.x and burn_Bom.y == i.y:
                 continue
@@ -133,8 +149,13 @@ class Bom:
                     i.flag = 1
                 if burn_Bom.y - burn_Bom.down < i.y:
                     i.flag = 1
+<<<<<<< HEAD
     
     def decision(self, Human, Bom):
+=======
+
+    def decision(self,Human,Bom):
+>>>>>>> origin/master
         for i in Human:
             if Bom.x == i.x:
                 if Bom.y + Bom.up >= i.y or Bom.y - Bom.down <= i.y:
