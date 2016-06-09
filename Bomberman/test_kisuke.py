@@ -5,47 +5,7 @@ import string
 import numpy as np
 from Bom import Bom
 from Player import Player
-
-class Player:
-    def __init__(self, x, y, fire, ID):
-        self.x = x
-        self.y = y
-        self.fire = fire
-        self.ID = ID
-        self.did = False
-
-    def move(self, direction, mv_rg):
-        if 'up' in direction and mv_rg[0] > 0:
-            self.y -= 1
-        elif 'dw' in direction and mv_rg[1] > 0:
-            self.y += 1
-        elif 'ri' in direction and mv_rg[2] > 0:
-            self.x += 1
-        elif 'le' in direction and mv_rg[3] > 0:
-            self.x -= 1
-
-    def createBom(self):
-        bom = Bom(x=self.x, y=self.y, fire=self.fire, time=3)
-        return bom
-
-class Object:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        # self.hardness = hardness
-
-'''
-class Bom:
-    def __init__(self, x, y, fire):
-        self.x = x
-        self.y = y
-        self.fire = fire
-        self.time = 1
-        self.up = 2
-        self.down = 2
-        self.right = 2
-        self.left = 2
-'''
+from Object import Object
 
 class Board:
     def __init__(self, width, height):
