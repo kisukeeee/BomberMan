@@ -46,25 +46,26 @@ class Board:
         while True:
             # up
             if (player.y - direc) > 0 and flag[0] is 1:
-                if self.class_check(self.board[player.x][player.y - direc]):
+
+                if self.class_check(self.board[player.y - direc][player.x]):
                     range[0] += 1
                 else:
                     flag[0] = 0
             # dw
             if (player.y + direc) < len(self.board) and flag[1] is 1:
-                if self.class_check(self.board[player.x][player.y + direc]):
+                if self.class_check(self.board[player.y + direc][player.x]):
                     range[1] += 1
                 else:
                     flag[1] = 0
             # ri
             if (player.x + direc) < len(self.board) and flag[2] is 1:
-                if self.class_check(self.board[player.x + direc][player.y]):
+                if self.class_check(self.board[player.y][player.x + direc]):
                     range[2] += 1
                 else:
                     flag[2] = 0
             # le
             if (player.x - direc) > 0 and flag[3] is 1:
-                if self.class_check(self.board[player.x - direc][player.y]):
+                if self.class_check(self.board[player.y - direc][player.x]):
                     range[3] += 1
                 else:
                     flag[3] = 0
@@ -72,7 +73,7 @@ class Board:
             if flag2 == sum(range):
                 break
             flag2 = sum(range)
-        # print(range)
+        print(range)
         return range
 
     def getObject(self, x, y):
@@ -90,7 +91,6 @@ class Board:
                     if delobj == obj:
                         del self.board[y][x][count]
                         return
-
 
     def getClassList(self, Class):
         ret = []

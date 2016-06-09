@@ -30,7 +30,7 @@ if __name__ == '__main__':
     # main()
     board = Board(width=9, height=9)
     p.append(Player(x=1, y=1, fire=2, ID=chr(65)))
-    p.append(Player(x=9, y=9, fire=2, ID=chr(66)))
+    #p.append(Player(x=9, y=9, fire=2, ID=chr(66)))
     board.display(p)
     while True:
         print('input direction')
