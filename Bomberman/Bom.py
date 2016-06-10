@@ -117,7 +117,7 @@ class Bom:
         for i in Human:
             for bom in Bom:
                 if bom.x == i.x:
-                    if bom.flag == 1 and bom.y - bom.up >= i.y and bom.y + bom.down <= i.y:
+                    if bom.flag == 1 and bom.y + bom.down >= i.y and bom.y - bom.up <= i.y:
                         i.did = True
 
                 if bom.y == i.y:
