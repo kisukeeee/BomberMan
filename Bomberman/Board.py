@@ -103,6 +103,7 @@ class Board:
         BurstBoard = np.zeros((self.height + 2, self.width + 2)).astype(np.int32)
         Boms = self.getClassList(Bom)
         for bom in Boms:
+            print(bom.time)
             if bom.flag == 1:
                 BurstBoard[bom.x - bom.left:bom.x + bom.right + 1, bom.y] = 1
                 BurstBoard[bom.x, bom.y - bom.up:bom.y + bom.down + 1] = 1
