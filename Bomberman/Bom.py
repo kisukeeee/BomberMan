@@ -72,10 +72,12 @@ class Bom:
                 if Bom.x == i.x:
                     if Bom.y - Bom.up <= i.y and Bom.y > i.y:
                         Bom.up = Bom.y - 1 - i.y
+                        print("#up"+str(i.y)+","+str(i.x)+","+str(Bom.up))
                         if Bom.up < 0:
                             Bom.up = 0
                     if Bom.y + Bom.down >= i.y and Bom.y < i.y:
                         Bom.down = i.y - Bom.y - 1
+                        print("#dw"+str(i.y)+","+str(i.x)+","+str(Bom.down))
                         if Bom.down < 0:
                             Bom.down = 0
 
@@ -87,10 +89,12 @@ class Bom:
                 if Bom.y == i.y:
                     if Bom.x - Bom.left <= i.x and Bom.x > i.x:
                         Bom.left = Bom.x - 1 - i.x
+                        print("#le"+str(i.y)+","+str(i.x)+","+str(Bom.left))
                         if Bom.left < 0:
                             Bom.left = 0
                     if Bom.x + Bom.right >= i.x and Bom.x < i.x:
                         Bom.right = i.x - Bom.x - 1
+                        print("#ri"+str(i.y)+","+str(i.x)+","+str(Bom.right))
                         if Bom.right < 0:
                             Bom.right = 0
 
@@ -102,15 +106,11 @@ class Bom:
                 continue
 
             if burn_Bom.y == i.y:
-                if burn_Bom.x + burn_Bom.right > i.x:
-                    i.flag = 1
-                if burn_Bom.x - burn_Bom.left  < i.x:
+                if burn_Bom.x + burn_Bom.right >= i.x and burn_Bom.x - burn_Bom.left  <= i.x:
                     i.flag = 1
 
             if burn_Bom.x == i.x:
-                if burn_Bom.y + burn_Bom.up > i.y:
-                    i.flag = 1
-                if burn_Bom.y - burn_Bom.down < i.y:
+                if burn_Bom.y - burn_Bom.up <= i.y and burn_Bom.y + burn_Bom.down >= i.y:
                     i.flag = 1
 
     def decision(self,Human,Bom):

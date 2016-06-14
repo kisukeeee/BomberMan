@@ -8,10 +8,14 @@ from Board import Board
 if __name__ == '__main__':
     # main()
     p = []
-    board = Board(width=9, height=9)
-    p.append(Player(x=5, y=5, fire=2, ID=chr(65)))  # randomに
-    p.append(Player(x=6, y=5, fire=2, ID=chr(66)))
-
+    board = Board(width=7, height=7)
+    p.append(Player(x=1, y=1, fire=2, ID=chr(65)))  # randomに
+    p.append(Player(x=7, y=7, fire=2, ID='T'))
+    """
+    p.append(Player(x=1, y=7, fire=2, ID='M'))
+    p.append(Player(x=7, y=1, fire=2, ID='N'))
+    p.append(Player(x=4, y=3, fire=2, ID='E'))
+    """
 
     board.display(p)
     while True:
@@ -25,7 +29,7 @@ if __name__ == '__main__':
         for i, player in enumerate(p):  # 移動
             player.move(directions[i], board.movable_range(player))
         #print(board.getClassList(Bom))
-        Bom(1,1,1,1).calcBurstArea(board.getClassList(Bom), board.getClassList(Object), board, p)
+        Bom(1, 1, 1, 1).calcBurstArea(board.getClassList(Bom), board.getClassList(Object), board, p)
         Bom(1, 1, 1, 1).decision(p, board.getClassList(Bom))
         board.display(p)
         # 死亡処理

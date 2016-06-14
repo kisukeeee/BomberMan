@@ -105,9 +105,11 @@ class Board:
         for bom in Boms:
             print(bom.time)
             if bom.flag == 1:
-                BurstBoard[bom.x - bom.left:bom.x + bom.right + 1, bom.y] = 1
-                BurstBoard[bom.x, bom.y - bom.up:bom.y + bom.down + 1] = 1
+                print("---"+str(bom.x - bom.left)+","+str(bom.x + bom.right + 1))
+                BurstBoard[bom.x - bom.left :bom.x + bom.right + 1, bom.y] = 1
+                BurstBoard[bom.x, bom.y - bom.up:bom.y + bom.down + 1 ] = 1
                 self.deleteObject(bom)
+        #print(BurstBoard.T)
 
         for x in range(self.width + 2):
             for y in range(self.height + 2):
